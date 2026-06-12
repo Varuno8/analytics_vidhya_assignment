@@ -1,9 +1,3 @@
-"""Download the Stack Overflow Python Q&A dataset.
-
-Source dataset: https://www.kaggle.com/datasets/stackoverflow/pythonquestions
-This script pulls the identical Hugging Face parquet mirror
-(koutch/stackoverflow_python) so no Kaggle credentials are needed.
-"""
 import sys
 import urllib.request
 from pathlib import Path

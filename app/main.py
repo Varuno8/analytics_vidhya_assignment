@@ -1,4 +1,3 @@
-"""FastAPI service exposing the Python Q&A RAG pipeline."""
 import logging
 import time
 from collections import OrderedDict
@@ -15,7 +14,6 @@ from app.schemas import AskRequest, AskResponse, HealthResponse
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# question -> response dict, evicted FIFO once full.
 _answer_cache: OrderedDict[str, dict] = OrderedDict()
 
 

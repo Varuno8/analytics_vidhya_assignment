@@ -1,4 +1,3 @@
-"""RAG pipeline: Chroma retrieval over Stack Overflow Python Q&A + Groq Llama generation."""
 import logging
 
 import chromadb
@@ -34,8 +33,6 @@ Learner's question: {question}
 
 
 class Retriever:
-    """Thin wrapper around a persistent Chroma collection of SO Python Q&A pairs."""
-
     def __init__(self, chroma_dir: str = config.CHROMA_DIR,
                  collection_name: str = config.COLLECTION_NAME):
         client = chromadb.PersistentClient(path=chroma_dir)
@@ -58,7 +55,6 @@ class Retriever:
                 "url": meta["url"],
                 "answer_score": meta["answer_score"],
                 "tags": meta.get("tags", ""),
-                # Cosine distance -> similarity in [0, 1].
                 "relevance": round(max(0.0, 1.0 - dist), 4),
                 "distance": dist,
             })
@@ -79,11 +75,8 @@ class RAGPipeline:
 
     async def ask(self, question: str, top_k: int = config.TOP_K) -> dict:
         hits = self.retriever.query(question, k=top_k)
-        # RELEVANCE_THRESHOLD is a minimum similarity (0-1); distance = 1 - similarity.
         relevant = [h for h in hits if h["relevance"] >= config.RELEVANCE_THRESHOLD]
         grounded = len(relevant) > 0
-        # When nothing passes the threshold, pass all hits anyway —
-        # the prompt instructs the model to flag unsourced answers and decline off-topic ones.
         context_hits = relevant if grounded else hits
 
         completion = await self.llm.chat.completions.create(

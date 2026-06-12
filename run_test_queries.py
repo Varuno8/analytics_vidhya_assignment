@@ -1,8 +1,3 @@
-"""Run a diverse set of live test queries against the API and write TEST_RESULTS.md.
-
-Usage: start the server (uvicorn app.main:app), then:
-    python run_test_queries.py [--base-url http://localhost:8000]
-"""
 import argparse
 import json
 import time
@@ -10,19 +5,14 @@ import time
 import httpx
 
 TEST_QUERIES = [
-    # Core language basics
     ("Basic", "How do I reverse a list in Python?"),
     ("Basic", "What is the difference between a list and a tuple?"),
-    # Common practical tasks
     ("Practical", "How do I read a file line by line in Python?"),
     ("Practical", "How do I merge two dictionaries?"),
-    # Conceptual / intermediate
     ("Conceptual", "What does if __name__ == '__main__' do?"),
     ("Conceptual", "Explain Python decorators with a simple example."),
     ("Conceptual", "What is the difference between deepcopy and shallow copy?"),
-    # Data-science flavoured (target audience)
     ("Data science", "How do I select rows in a pandas DataFrame where a column matches a value?"),
-    # Edge cases
     ("Edge: vague", "my code is slow how to make fast"),
     ("Edge: off-topic", "What is the capital of France?"),
 ]

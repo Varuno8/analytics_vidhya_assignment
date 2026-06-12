@@ -1,4 +1,3 @@
-"""API tests. LLM and retriever are mocked so tests run without an index or API key."""
 from unittest.mock import AsyncMock, MagicMock
 
 import pytest

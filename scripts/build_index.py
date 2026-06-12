@@ -1,15 +1,3 @@
-"""Build the Chroma vector index from the raw Stack Overflow parquet shards.
-
-Selection strategy: keep the single best-scored answer per question, then take
-the top-N pairs by answer score. High-vote answers are community-verified,
-which is what makes the generated answers trustworthy.
-
-Embedding strategy: embeddings are computed from "title + question excerpt"
-(what a learner's query actually resembles), while the stored document holds
-the full cleaned Q&A text handed to the LLM. all-MiniLM-L6-v2 truncates at
-256 tokens, so embedding only the question side loses nothing and matches
-query-to-question semantics.
-"""
 import argparse
 import re
 import time

@@ -1,8 +1,3 @@
-"""Deploy the app (with prebuilt index) to a Hugging Face Space (Docker SDK).
-
-Prereqs: `hf auth login` done, index built at data/chroma, GROQ_API_KEY in env/.env.
-Usage:  python scripts/deploy_hf.py [--space-id user/python-qa-assistant]
-"""
 import argparse
 import os
 from pathlib import Path

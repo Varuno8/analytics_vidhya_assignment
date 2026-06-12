@@ -1,4 +1,3 @@
-"""Integration test against the real Chroma index (skipped if not built)."""
 from pathlib import Path
 
 import pytest
@@ -6,7 +5,7 @@ import pytest
 CHROMA_DIR = Path(__file__).resolve().parent.parent / "data" / "chroma"
 
 pytestmark = pytest.mark.skipif(
-    not CHROMA_DIR.exists(), reason="Chroma index not built (run scripts/build_index.py)"
+    not CHROMA_DIR.exists(), reason="Chroma index not built"
 )
 
 
